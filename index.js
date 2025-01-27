@@ -93,20 +93,26 @@ app.get("/mens", (request, response) => {
 // Task 4: Plug in the values in category.ejs to get the page working
 // PINK ONLY: Set up a route handler for /womens to pass in similar data for women's
 
-// app.get("/womens", (request, response) => {
-//   response.render("category.ejs", inventory[1].category)
-// })
+app.get("/womens", (request, response) => {
+  response.render("category.ejs", inventory[1])
+})
 
 // Task 5: Set up the route handler for /item/0 which sends back the first item in product.ejs
 
-// app.get("/item/0", (request, response) => {
-//   response.send()
-// })
+app.get("/item/0", (request, response) => {
+  response.render("product.ejs", inventory[0].items[0])
+})
 
 
 // Task 6: Plug in the values in product.ejs to get the page working
 // Extra credit: modify the /item/0 route handler to have dynamic path parameter and return any item's data
+app.get("/item/:num", (request, response) => {
+  const searc = request.params.num
+  console.log(searc)
 
-app.listen(3000, () => {
+  response.render("product.ejs", inventory[0].items[searc])
+})
+
+app.listen(3001, () => {
   console.log("Server running")
 })
